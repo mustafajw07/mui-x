@@ -140,6 +140,13 @@ export const PreferencesMenu = React.forwardRef(function PreferencesMenu(
   const showTimeFormatSubmenu = preferencesMenuConfig?.toggleAmpm !== false;
   const showWeekStartsOnSubmenu = preferencesMenuConfig?.toggleWeekStartsOn !== false;
 
+  const showDividerBeforeTimeFormat = showTimeFormatSubmenu && visibleOptions.length > 0;
+  const showDividerBeforeWeekStartsOn =
+    showWeekStartsOnSubmenu && (visibleOptions.length > 0 || showTimeFormatSubmenu);
+  const showDividerBeforeSpecificOptions =
+    showSpecificOptions &&
+    (visibleOptions.length > 0 || showTimeFormatSubmenu || showWeekStartsOnSubmenu);
+
   // Early return if no menu items to show
   if (
     !showTimeFormatSubmenu &&
@@ -205,9 +212,7 @@ export const PreferencesMenu = React.forwardRef(function PreferencesMenu(
             </PreferencesMenuListItemIcon>
           </MenuItem>
         ))}
-        {showTimeFormatSubmenu && visibleOptions.length > 0 && (
-          <Divider className={classes.preferencesMenuDivider} />
-        )}
+        {showDividerBeforeTimeFormat && <Divider className={classes.preferencesMenuDivider} />}
         {showTimeFormatSubmenu && (
           <PreferencesMenuListSubheader className={classes.preferencesMenuListSubheader}>
             {localeText.timeFormat}
@@ -253,9 +258,7 @@ export const PreferencesMenu = React.forwardRef(function PreferencesMenu(
             </PreferencesMenuListItemIcon>
           </MenuItem>
         )}
-        {showWeekStartsOnSubmenu && (visibleOptions.length > 0 || showTimeFormatSubmenu) && (
-          <Divider className={classes.preferencesMenuDivider} />
-        )}
+        {showDividerBeforeWeekStartsOn && <Divider className={classes.preferencesMenuDivider} />}
         {showWeekStartsOnSubmenu && (
           <PreferencesMenuListSubheader className={classes.preferencesMenuListSubheader}>
             {localeText.startWeekOn}
@@ -287,10 +290,7 @@ export const PreferencesMenu = React.forwardRef(function PreferencesMenu(
               </PreferencesMenuListItemIcon>
             </MenuItem>
           ))}
-        {showSpecificOptions &&
-          (visibleOptions.length > 0 || showTimeFormatSubmenu || showWeekStartsOnSubmenu) && (
-            <Divider className={classes.preferencesMenuDivider} />
-          )}
+        {showDividerBeforeSpecificOptions && <Divider className={classes.preferencesMenuDivider} />}
         {showSpecificOptions && (
           <PreferencesMenuListSubheader className={classes.preferencesMenuListSubheader}>
             {localeText.viewSpecificOptions(currentView)}
