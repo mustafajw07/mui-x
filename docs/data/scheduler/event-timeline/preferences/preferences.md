@@ -48,3 +48,14 @@ return (
 ```
 
 :::
+
+## Preferences menu
+
+The preferences menu lets users customize the component to their needs.
+
+Available menu items:
+
+- `toggleAmpm`: Show/hide the menu item that toggles 12/24‑hour time format.
+- `toggleWeekStartsOn`: Show/hide the menu item that changes the first day of the week.
+
+{{"demo": "PreferencesMenu.js", "bg": "inline", "defaultCodeOpen": false}}
